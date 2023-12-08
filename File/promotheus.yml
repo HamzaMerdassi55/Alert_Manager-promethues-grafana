@@ -1,0 +1,21 @@
+global:
+ scrape_interval: 15s
+ evaluation_interval: 15s
+
+# Scrape configurations
+scrape_configs:
+ - job_name: 'spring-boot-prometheus'
+   metrics_path: '/actuator/prometheus'
+   static_configs:
+     - targets: ['192.168.127.1:8080']
+
+# Rule files
+rule_files:
+  - 'alert-rules.yml'
+
+# Alerting configurations
+alerting:
+  alertmanagers:
+    - scheme: http
+    - static_configs:
+        - targets: ['alertmanager:9093']

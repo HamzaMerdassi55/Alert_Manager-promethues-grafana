@@ -1,0 +1,33 @@
+# Global configurations for the alertmanager
+global:
+  resolve_timeout: 1m
+  slack_api_url: 'https://hooks.slack.com/services/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'
+  pagerduty_url: 'https://events.pagerduty.com/v2/enqueue'
+# Routing configuration
+route:
+  receiver: lab-alert-manager
+  repeat_interval: 1m
+
+# Receivers configuration
+
+receivers:
+- name: 'lab-alert-manager'
+
+  slack_configs:
+    - send_resolved: true
+      username: 'Alertmanager'
+      channel: '#monitoring-infrastructure'
+      api_url: 'https://hooks.slack.com/services/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'
+
+  pagerduty_configs:
+    - service_key: a9369e00e6804002d1449c159ee8e187
+      send_resolved: true
+
+  email_configs:
+    - to: '@gmail.com'
+      from: '@gmail.com'
+      smarthost: 'smtp.gmail.com:587'
+      auth_username: '@gmail.com'
+      auth_identity: '@gmail.com'
+      auth_password: 'dmzr qhkv lmbh admt'
+      send_resolved: true
